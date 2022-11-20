@@ -62,6 +62,20 @@ let private addMissingInstanceMemberTests state =
         """
   ])
 
+let private thisUnionCaseDoesNotTakeArguments  state =
+  serverTestList (nameof UnionCaseDoesNotTakeArguments) state defaultConfigDto None (fun server -> [
+    testCaseAsync "This union case does not take arguments" <|
+      CodeFix.check server
+        """
+        let (None x) = None
+        """
+        (Diagnostics.expectCode "725")
+        (CodeFix.ofKind "quickfix" >> CodeFix.withTitle UnionCaseDoesNotTakeArguments.title)
+        """
+        let (None) = None
+        """
+  ])
+
 let private addMissingRecKeywordTests state =
   serverTestList (nameof AddMissingRecKeyword) state defaultConfigDto None (fun server -> [
     // `rec` in single function is handled in `MakeOuterBindingRecursive`
@@ -1617,4 +1631,5 @@ let tests state = testList "CodeFix tests" [
   useMutationWhenValueIsMutableTests state
   useTripleQuotedInterpolationTests state
   wrapExpressionInParenthesesTests state
+  thisUnionCaseDoesNotTakeArguments state
 ]

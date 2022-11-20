@@ -1118,7 +1118,8 @@ type AdaptiveFSharpLspServer(workspaceLoader: IWorkspaceLoader, lspClient: FShar
          AddExplicitTypeAnnotation.fix tryGetParseResultsForFile
          ConvertPositionalDUToNamed.fix tryGetParseResultsForFile getRangeText
          UseTripleQuotedInterpolation.fix tryGetParseResultsForFile getRangeText
-         RenameParamToMatchSignature.fix tryGetParseResultsForFile |])
+         RenameParamToMatchSignature.fix tryGetParseResultsForFile
+         UnionCaseDoesNotTakeArguments.fix |])
 
   let forgetDocument (uri: DocumentUri) =
     let filePath = uri |> Path.FileUriToLocalPath |> Utils.normalizePath

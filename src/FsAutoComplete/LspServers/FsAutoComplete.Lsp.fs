@@ -1188,7 +1188,8 @@ type FSharpLspServer(state: State, lspClient: FSharpLspClient) =
              AddExplicitTypeAnnotation.fix tryGetParseResultsForFile
              ConvertPositionalDUToNamed.fix tryGetParseResultsForFile getRangeText
              UseTripleQuotedInterpolation.fix tryGetParseResultsForFile getRangeText
-             RenameParamToMatchSignature.fix tryGetParseResultsForFile |]
+             RenameParamToMatchSignature.fix tryGetParseResultsForFile
+             UnionCaseDoesNotTakeArguments.fix |]
 
 
         match p.RootPath, c.AutomaticWorkspaceInit with
